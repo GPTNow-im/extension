@@ -51,5 +51,11 @@
   },
   "rate": {
     "message": "在 Chrome Store 给一个好评"
+  },
+  "config": {
+    "message": "配置"
+  },
+  "tips": {
+    "message": "Tips: 按住拖动按钮可移动位置"
   }
 }

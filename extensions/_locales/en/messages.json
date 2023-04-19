@@ -51,5 +51,11 @@
   },
   "rate": {
     "message": "Rate this extension"
+  },
+  "config": {
+    "message": "Setting"
+  },
+  "tips": {
+    "message": "Tips: Hold to drag the button"
   }
 }
