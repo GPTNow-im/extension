@@ -1,0 +1,74 @@
+#chatgpt-anywhere-trigger {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2147483647;
+  background-color: rgb(30, 30, 30);
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  line-height: 23px;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  box-sizing: border-box;
+  animation: huxi_animate 6s ease-in-out 0.2s infinite forwards;
+  border: 1px solid rgb(30, 30, 30);
+}
+#chatgpt-anywhere-trigger:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(30, 30, 30);
+  animation: hover_animate 0.3s ease 0s 1 normal both;
+}
+#chatgpt-anywhere-trigger:hover #chatgpt-anywhere-trigger-content {
+  transform: scale(1.2);
+}
+@keyframes hover_animate {
+  0% {
+    transform: scale(1);
+    border-radius: 0%;
+  }
+  100% {
+    transform: scale(1.4);
+    border-radius: 50%;
+  }
+}
+@keyframes display_anywhere_trigger {
+  0% {
+    opacity: 0;
+    transform: translateY(500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+// 一个缓慢弹性的呼吸动画
+@keyframes huxi_animate {
+  0% {
+    border-radius: 0%;
+    transform: scale(1);
+  }
+  50% {
+    border-radius: 30%;
+    transform: scale(0.8);
+  }
+  100% {
+    border-radius: 0%;
+    transform: scale(1);
+  }
+}
+#chatgpt-anywhere-container {
+  animation: display_anywhere_trigger 0.8s ease 0s 1 normal forwards;
+}
+
+#chatgpt-anywhere-trigger-content {
+  user-select: none;
+  width: 100%;
+  height: 100%;
+}
