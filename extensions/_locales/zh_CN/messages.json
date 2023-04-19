@@ -1,0 +1,55 @@
+{
+  "title": {
+    "message": "ChatGPT Anywhere, 在任意页面唤起 ChatGPT 并对话",
+    "description": "ChatGPT Anywhere, 在任意页面唤起 ChatGPT 并对话"
+  },
+  "description": {
+    "message": "随时、随地、任意页面唤起 Chat GPT 并在当前页面持续对话",
+    "description": "随时、随地、任意页面唤起 Chat GPT 并在当前页面持续对话"
+  },
+  "hello1": {
+    "message": "欢迎来到新世界，请出示您的 OpenAI APIKEY，解锁新世界的大门..."
+  },
+  "hello2": {
+    "message": "你可以在这里申请：<a href=\"https://beta.openai.com/account/api-keys\" target=\"_blank\">https://beta.openai.com/account/api-keys</a>"
+  },
+  "hello3": {
+    "message": "请输入您的 OpenAI APIKEY"
+  },
+  "hi1": {
+    "message": "嗨~~~"
+  },
+  "hi2": {
+    "message": "我是"
+  },
+  "hi3": {
+    "message": "有什么需要我帮助的?"
+  },
+  "open": {
+    "message": "G"
+  },
+  "key_success": {
+    "message": "秘钥存储成功，现在为您打开新世界的大门，尽情享受吧~~~"
+  },
+  "key_success_1": {
+    "message": "如果需要更改秘钥，输入 \"change key\" 即可"
+  },
+  "tip1": {
+    "message": "Tip: 支持流式对话，响应更快"
+  },
+  "submit": {
+    "message": "提交"
+  },
+  "clear": {
+    "message": "清空"
+  },
+  "hide": {
+    "message": "临时隐藏"
+  },
+  "share": {
+    "message": "在 Twitter 点赞"
+  },
+  "rate": {
+    "message": "在 Chrome Store 给一个好评"
+  }
+}

@@ -1,0 +1,47 @@
+#chatgpt-anywhere-trigger {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2147483647;
+  background-color: rgb(30, 30, 30);
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  line-height: 23px;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: all 0.4s ease 0s;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  box-sizing: border-box;
+  animation: display_anywhere_trigger 0.8s ease 0s 1 normal forwards;
+  border: 1px solid rgb(30, 30, 30);
+}
+#chatgpt-anywhere-trigger:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(30, 30, 30);
+}
+#chatgpt-anywhere-trigger:hover #chatgpt-anywhere-trigger-content {
+  transform: scale(1.2);
+}
+@keyframes display_anywhere_trigger {
+  0% {
+    opacity: 0;
+    transform: translateY(500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#chatgpt-anywhere-container .notransition {
+  transition: none !important;
+}
+
+#chatgpt-anywhere-trigger-content {
+  user-select: none;
+  width: 23px;
+  height: 23px;
+}

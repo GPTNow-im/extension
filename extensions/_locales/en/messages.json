@@ -1,0 +1,55 @@
+{
+  "title": {
+    "message": "ChatGPT Anywhere, Chat on any page",
+    "description": "ChatGPT Anywhere, Chat on any page"
+  },
+  "description": {
+    "message": "ChatGPT anywhere on anytime in anypage",
+    "description": "ChatGPT anywhere on anytime in anypage"
+  },
+  "hello1": {
+    "message": "This is first time you are here, you should provide an openai api key to continue."
+  },
+  "hello2": {
+    "message": "You can get one from <a href=\"https://beta.openai.com/account/api-keys\" target=\"_blank\">https://beta.openai.com/account/api-keys</a>"
+  },
+  "hello3": {
+    "message": "Please provide your openai api key"
+  },
+  "hi1": {
+    "message": "Hi!"
+  },
+  "hi2": {
+    "message": "I'm"
+  },
+  "hi3": {
+    "message": "What can i do for you?"
+  },
+  "open": {
+    "message": "G"
+  },
+  "key_success": {
+    "message": "Key set successfully, you can start chatting now, enjoy!"
+  },
+  "key_success_1": {
+    "message": "If you want to change key, just type \"change key\""
+  },
+  "tip1": {
+    "message": "Tip: support stream chat now"
+  },
+  "submit": {
+    "message": "Submit"
+  },
+  "clear": {
+    "message": "Clear"
+  },
+  "hide": {
+    "message": "Hide"
+  },
+  "share": {
+    "message": "Share this extension"
+  },
+  "rate": {
+    "message": "Rate this extension"
+  }
+}

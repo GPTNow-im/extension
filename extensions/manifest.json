@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "version": "0.9",
+  "name": "__MSG_title__",
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "action": {
+    "default_icon": "images/logo-new.png",
+    "default_title": "__MSG_description__",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "images/logo-new.png",
+    "48": "images/logo-new.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["./dist/static/js/content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "./dist/static/js/background.js"
+  },
+  "permissions": ["storage", "contextMenus"],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*"],
+      "matches": ["https://*/*"]
+    }
+  ]
+}
