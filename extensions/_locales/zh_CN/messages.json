@@ -60,5 +60,8 @@
   },
   "openchat": {
     "message": "开始对话"
+  },
+  "askgpt": {
+    "message": "向 GPT 提问"
   }
 }

@@ -52,6 +52,7 @@ export default observer((props: { onClose: () => void; show: boolean }) => {
         width: '0',
         height: '0',
         zIndex: 999,
+        pointerEvents: 'all',
       }}
     >
       <div

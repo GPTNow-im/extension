@@ -85,7 +85,8 @@
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1",
     "styled-components": "^5.3.5",
-    "uikit.chat": "^0.0.15"
+    "uikit.chat": "^0.0.17",
+    "eventemitter3": "^5.0.0"
   },
   "scripts": {
     "build": "node scripts/build.js",

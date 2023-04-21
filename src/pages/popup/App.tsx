@@ -53,7 +53,11 @@ function Root() {
 ReactDOM.render(
   <React.StrictMode>
     <Root />
-    <Toaster />
+    <Toaster
+      containerStyle={{
+        zIndex: 999999999999,
+      }}
+    />
   </React.StrictMode>,
   rootElement,
 );

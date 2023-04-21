@@ -7,6 +7,7 @@ import { ConfigComponent } from '../../components/Config';
 
 import { toast } from 'react-hot-toast';
 import { makeElementDrag } from '../../functions/makeElementDrag';
+import { globalBus } from '../../functions/globalBus';
 const chatuiClient = createClient();
 const chatGPTStore = createChatGPTClient(chatuiClient);
 
@@ -16,6 +17,8 @@ const chatGPTStore = createChatGPTClient(chatuiClient);
 //     messages: JSON.stringify(chatuiClient.messageStore.messages),
 //   });
 // });
+
+const logo = chrome.runtime.getURL('images/logo.png');
 
 function getLang(key: string) {
   return chrome && chrome.i18n ? chrome.i18n.getMessage(key) : key;
@@ -64,6 +67,25 @@ function Root() {
         }, 1000);
       }
     });
+    globalBus.addListener('selecttext', (text) => {
+      document
+        .getElementById('chatgpt-anywhere-trigger')
+        ?.classList.add('hover');
+      setTimeout(() => {
+        document
+          .getElementById('chatgpt-anywhere-trigger')
+          ?.classList.remove('hover');
+      }, 2000);
+    });
+    globalBus.addListener('openchat', (text) => {
+      if (text) {
+        setIsOpen(true);
+        setTimeout(() => {
+          chatGPTStore.chatuiClient.chatboxStore.inputValue = text;
+          chatGPTStore.chatuiClient.chatboxStore.submit();
+        }, 1000);
+      }
+    });
     makeElementDrag(() => {
       setIsOpen(true);
     });
@@ -85,9 +107,14 @@ function Root() {
               onDoubleClick={() => {
                 setShowTrigger(false);
               }}
+              style={{
+                right: '25px',
+                bottom: '25px',
+              }}
             >
               <Tooltip
                 enterDelay={400}
+                leaveDelay={100}
                 content={
                   <div
                     style={{
@@ -257,7 +284,7 @@ function Root() {
                 placement="leftEnd"
               >
                 <div id="chatgpt-anywhere-trigger-content">
-                  {getLang('open')}
+                  <img src={logo} />
                 </div>
               </Tooltip>
             </div>

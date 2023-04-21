@@ -60,5 +60,8 @@
   },
   "openchat": {
     "message": "Open Chat"
+  },
+  "askgpt": {
+    "message": "Ask GPT"
   }
 }

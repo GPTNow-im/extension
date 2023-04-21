@@ -1,17 +1,17 @@
 {
   "manifest_version": 3,
-  "version": "0.10",
+  "version": "0.11",
   "name": "__MSG_title__",
   "description": "__MSG_description__",
   "default_locale": "en",
   "action": {
-    "default_icon": "images/logo-new.png",
+    "default_icon": "images/logo.png",
     "default_title": "__MSG_description__",
     "default_popup": "popup.html"
   },
   "icons": {
-    "128": "images/logo-new.png",
-    "48": "images/logo-new.png"
+    "128": "images/logo.png",
+    "48": "images/logo.png"
   },
   "content_scripts": [
     {
@@ -26,7 +26,7 @@
   "web_accessible_resources": [
     {
       "resources": ["images/*"],
-      "matches": ["https://*/*"]
+      "matches": ["https://*/*", "http://*/*"]
     }
   ]
 }

@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import {
   getActiveModel,
   getKey,
+  getMemoryLength,
   getTemperature,
   setActiveModel,
   setActiveTemperature,
   setKey,
+  setMemoryLength,
 } from '../functions/chatgpt';
 
 export function ConfigComponent(props: {
@@ -16,6 +18,7 @@ export function ConfigComponent(props: {
     apikey: string;
     model: 'gpt-3.5-turbo' | 'gpt-4';
     temperature: number;
+    memorylength: number;
   }) => void;
 }) {
   const [apikey, setApikey] = useState('');
@@ -23,24 +26,31 @@ export function ConfigComponent(props: {
     'gpt-3.5-turbo',
   );
   const [temperature, setTemperature] = useState(0.6);
+  const [_memoryLength, _setMemoryLength] = useState(4);
+
   function updateConfig() {
     setKey(apikey);
     setActiveModel(model);
     setActiveTemperature(temperature);
 
+    setMemoryLength(_memoryLength);
+
     props.onSubmit({
       apikey,
       model,
       temperature,
+      memorylength: _memoryLength,
     });
   }
   async function initConfigFromLocal() {
     const _apikey = await getKey();
     const _model = await getActiveModel();
     const _temperature = await getTemperature();
+    const _memoryLength = await getMemoryLength();
     setApikey(_apikey);
     setModel(_model);
     setTemperature(_temperature);
+    setMemoryLength(_memoryLength);
   }
 
   useEffect(() => {
@@ -65,35 +75,45 @@ export function ConfigComponent(props: {
         </Text>
       </Modal.Header>
       <Modal.Body>
-        <Input
-          bordered
-          color="primary"
-          size="lg"
-          placeholder="API Key"
-          contentLeft={<>🔑</>}
+        <div
           style={{
-            textAlign: 'left',
+            paddingTop: '30px',
           }}
-          value={apikey}
-          onChange={(e) => {
-            setApikey(e.target.value);
-          }}
-        />
+        >
+          <Input
+            color="primary"
+            size="lg"
+            labelPlaceholder="API Key"
+            style={{
+              textAlign: 'left',
+            }}
+            fullWidth={true}
+            value={apikey}
+            onChange={(e) => {
+              setApikey(e.target.value);
+            }}
+          />
+        </div>
         <Dropdown>
           <Dropdown.Trigger>
-            <Input
-              bordered
-              color="primary"
-              size="lg"
-              placeholder="Active Model"
-              contentLeft={<>🧬</>}
-              value={model}
-              readOnly={true}
+            <div
               style={{
-                textAlign: 'left',
-                textTransform: 'uppercase',
+                paddingTop: '30px',
               }}
-            />
+            >
+              <Input
+                color="primary"
+                size="lg"
+                fullWidth={true}
+                labelPlaceholder="Active Model"
+                value={model}
+                readOnly={true}
+                style={{
+                  textAlign: 'left',
+                  textTransform: 'uppercase',
+                }}
+              />
+            </div>
           </Dropdown.Trigger>
           <Dropdown.Menu
             color="secondary"
@@ -109,24 +129,52 @@ export function ConfigComponent(props: {
             <Dropdown.Item key="gpt-4">GPT-4</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Input
-          bordered
-          type="number"
-          min={0}
-          max={1}
-          step={0.1}
-          color="primary"
-          size="lg"
-          placeholder="Temperature"
-          contentLeft={<>🪄</>}
+        <div
           style={{
-            textAlign: 'left',
+            paddingTop: '30px',
           }}
-          value={temperature}
-          onChange={(e) => {
-            setTemperature(parseFloat(e.target.value));
+        >
+          <Input
+            type="number"
+            min={0}
+            max={1}
+            step={0.1}
+            color="primary"
+            size="lg"
+            fullWidth={true}
+            labelPlaceholder="Temperature"
+            style={{
+              textAlign: 'left',
+            }}
+            value={temperature}
+            onChange={(e) => {
+              setTemperature(parseFloat(e.target.value));
+            }}
+          />
+        </div>
+        <div
+          style={{
+            paddingTop: '30px',
           }}
-        />
+        >
+          <Input
+            fullWidth={true}
+            type="number"
+            min={0}
+            max={10}
+            step={1}
+            color="primary"
+            size="lg"
+            labelPlaceholder="Memory Length"
+            style={{
+              textAlign: 'left',
+            }}
+            value={_memoryLength}
+            onChange={(e) => {
+              _setMemoryLength(parseFloat(e.target.value));
+            }}
+          />
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button

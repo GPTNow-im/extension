@@ -1,6 +1,14 @@
 export function makeElementDrag(clickCallback: () => void) {
   const rootElement = document.getElementById('chatgpt-anywhere-trigger');
+
   if (!rootElement) return;
+  if (localStorage.getItem('chatgpt-pos')) {
+    const pos = (localStorage.getItem('chatgpt-pos') || '').split('-');
+    if (pos.length === 2) {
+      rootElement.style.right = pos[0];
+      rootElement.style.bottom = pos[1];
+    }
+  }
   var pos1 = 0,
     pos2 = 0,
     pos3 = 0,
@@ -47,10 +55,10 @@ export function makeElementDrag(clickCallback: () => void) {
         Number(rootElement.style.right.replace(/[^\d]/g, '')) - pos1 + 'px';
       rootElement.style.bottom =
         Number(rootElement.style.bottom.replace(/[^\d]/g, '')) - pos2 + 'px';
-      // localStorage.setItem(
-      //   'metapavo-pos',
-      //   [rootElement.style.right, rootElement.style.bottom].join('-'),
-      // );
+      localStorage.setItem(
+        'chatgpt-pos',
+        [rootElement.style.right, rootElement.style.bottom].join('-'),
+      );
     }
   }
 

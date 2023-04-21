@@ -47,3 +47,19 @@ export async function setActiveTemperature(temperature: number) {
     });
   });
 }
+
+export async function getMemoryLength(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(['memorylength'], function (result) {
+      resolve(result.memorylength as number);
+    });
+  });
+}
+
+export async function setMemoryLength(memorylength: number) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.set({ memorylength }, function () {
+      resolve(null);
+    });
+  });
+}
