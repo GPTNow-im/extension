@@ -17,7 +17,7 @@
   overflow: hidden;
   box-sizing: content-box;
   animation: huxi_animate 6s ease-in-out 0.2s infinite forwards;
-  border: 1px solid rgb(30, 30, 30);
+  border: 1px solid #fff;
   pointer-events: all;
 }
 #chatgpt-anywhere-trigger:hover,
@@ -56,7 +56,7 @@
 @keyframes huxi_animate {
   0% {
     border-radius: 0%;
-    transform: scale(1);
+    transform: scale(1.2);
   }
   50% {
     border-radius: 30%;
@@ -64,7 +64,7 @@
   }
   100% {
     border-radius: 0%;
-    transform: scale(1);
+    transform: scale(1.2);
   }
 }
 #chatgpt-anywhere-container {
