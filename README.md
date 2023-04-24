@@ -1,8 +1,8 @@
 <h2 align="center">ChatGPT Anywhere chrome extension (New Name: GPTNow.pro)</h2>
 <p></p>
 <p align="center">
-  <a href="https://chrome.google.com/webstore/detail/chatgpt-anywhere-chat-on/jcfkfnhebnhaldhlgfiaglpcjkdikbhc"><img src="https://img.shields.io/badge/Download%20from%20Chrome%20Store-green?&labelColor=000&style=for-the-badge&logo=googlechrome" /></a>
-  <a href="https://gptnow.pro"><img src="https://img.shields.io/badge/Visit%20https%3A%2F%2Fgptnow.pro-green?&labelColor=000&style=for-the-badge&logo=safari" />
+  <a href="https://chrome.google.com/webstore/detail/chatgpt-anywhere-chat-on/jcfkfnhebnhaldhlgfiaglpcjkdikbhc"><img src="https://img.shields.io/badge/Download%20from-Chrome%20Store-green?&labelColor=000&style=for-the-badge&logo=googlechrome" /></a>
+  <a href="https://gptnow.pro"><img src="https://img.shields.io/badge/Visit%20on-https%3A%2F%2Fgptnow.pro-green?&labelColor=000&style=for-the-badge&logo=safari" />
 </p>
 
 <p align="center">This is a chrome extension that allows you to use the ChatGPT anywhere on the anypage.</p>
