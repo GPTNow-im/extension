@@ -11,7 +11,7 @@
 
 <p align="center">Visit <a href="https://gptnow.pro">https://gptnow.pro</a> directly.</p>
 
- <H2 align="center">How to use</H2>
+ <h3 align="center">How to use</h3>
 <p></p>
 <p align="center"><a href="https://chrome.google.com/webstore/detail/chatgpt-anywhere-chat-on/jcfkfnhebnhaldhlgfiaglpcjkdikbhc"><img src="https://user-images.githubusercontent.com/897401/233967967-03e1f658-907f-4d61-9e94-5aa894769b10.svg"/></a></p>
 
@@ -27,7 +27,7 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/897401/233968646-7c4b277c-c0a7-47b1-a66c-1578d78e5539.png" width="300" /></p>
 
 
- <H2 align="center">Preview</H2>
+ <h3 align="center">Preview</h3>
 
 <p align="center"><img src="https://user-images.githubusercontent.com/897401/233962454-f511123f-b9bf-46cb-88cc-7fea04da1b89.png" width="500" /></p>
 
