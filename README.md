@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://user-images.githubusercontent.com/897401/233986314-8edadcc3-0900-4630-9851-611244875e29.png" width="120"/>
+</p>
+
 <h2 align="center">Chrome Extension: GPTNow.pro</h2>
 <p></p>
 <p align="center">
