@@ -2,11 +2,15 @@ import { Modal, Input, Dropdown, Button, Text } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import {
   getActiveModel,
+  getGPTBaseURL,
+  getGPTEmoji,
   getKey,
   getMemoryLength,
   getTemperature,
   setActiveModel,
   setActiveTemperature,
+  setGPTBaseURL,
+  setGPTEmoji,
   setKey,
   setMemoryLength,
 } from '../functions/chatgpt';
@@ -19,6 +23,8 @@ export function ConfigComponent(props: {
     model: 'gpt-3.5-turbo' | 'gpt-4';
     temperature: number;
     memorylength: number;
+    baseURL: string;
+    emoji: string;
   }) => void;
 }) {
   const [apikey, setApikey] = useState('');
@@ -27,19 +33,26 @@ export function ConfigComponent(props: {
   );
   const [temperature, setTemperature] = useState(0.6);
   const [_memoryLength, _setMemoryLength] = useState(4);
+  const [baseURL, setBaseURL] = useState('https://pro.gptnow.pro');
 
-  function updateConfig() {
-    setKey(apikey);
-    setActiveModel(model);
-    setActiveTemperature(temperature);
+  const [emoji, setEmoji] = useState('');
+  async function updateConfig() {
+    await setKey(apikey);
+    await setActiveModel(model);
+    await setActiveTemperature(temperature);
 
-    setMemoryLength(_memoryLength);
+    await setMemoryLength(_memoryLength);
+    await setGPTBaseURL(baseURL);
+
+    await setGPTEmoji(emoji);
 
     props.onSubmit({
       apikey,
       model,
       temperature,
       memorylength: _memoryLength,
+      baseURL,
+      emoji,
     });
   }
   async function initConfigFromLocal() {
@@ -47,10 +60,16 @@ export function ConfigComponent(props: {
     const _model = await getActiveModel();
     const _temperature = await getTemperature();
     const _memoryLength = await getMemoryLength();
+    const _baseURL = await getGPTBaseURL();
+
+    const _emoji = await getGPTEmoji();
+
     setApikey(_apikey);
     setModel(_model);
     setTemperature(_temperature);
     setMemoryLength(_memoryLength);
+    setBaseURL(_baseURL);
+    setEmoji(_emoji);
   }
 
   useEffect(() => {
@@ -77,12 +96,31 @@ export function ConfigComponent(props: {
       <Modal.Body>
         <div
           style={{
-            paddingTop: '30px',
+            paddingTop: '15px',
           }}
         >
           <Input
             color="primary"
-            size="lg"
+            size="sm"
+            labelPlaceholder="Proxy Base URL"
+            style={{
+              textAlign: 'left',
+            }}
+            fullWidth={true}
+            value={baseURL}
+            onChange={(e) => {
+              setBaseURL(e.target.value);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            paddingTop: '15px',
+          }}
+        >
+          <Input
+            color="primary"
+            size="sm"
             labelPlaceholder="API Key"
             style={{
               textAlign: 'left',
@@ -98,12 +136,12 @@ export function ConfigComponent(props: {
           <Dropdown.Trigger>
             <div
               style={{
-                paddingTop: '30px',
+                paddingTop: '15px',
               }}
             >
               <Input
                 color="primary"
-                size="lg"
+                size="sm"
                 fullWidth={true}
                 labelPlaceholder="Active Model"
                 value={model}
@@ -131,7 +169,7 @@ export function ConfigComponent(props: {
         </Dropdown>
         <div
           style={{
-            paddingTop: '30px',
+            paddingTop: '15px',
           }}
         >
           <Input
@@ -140,7 +178,7 @@ export function ConfigComponent(props: {
             max={1}
             step={0.1}
             color="primary"
-            size="lg"
+            size="sm"
             fullWidth={true}
             labelPlaceholder="Temperature"
             style={{
@@ -154,7 +192,7 @@ export function ConfigComponent(props: {
         </div>
         <div
           style={{
-            paddingTop: '30px',
+            paddingTop: '15px',
           }}
         >
           <Input
@@ -164,7 +202,7 @@ export function ConfigComponent(props: {
             max={10}
             step={1}
             color="primary"
-            size="lg"
+            size="sm"
             labelPlaceholder="Memory Length"
             style={{
               textAlign: 'left',
@@ -175,6 +213,45 @@ export function ConfigComponent(props: {
             }}
           />
         </div>
+        <Dropdown>
+          <Dropdown.Trigger>
+            <div
+              style={{
+                paddingTop: '15px',
+              }}
+            >
+              <Input
+                color="primary"
+                size="sm"
+                fullWidth={true}
+                labelPlaceholder="GPT emoji"
+                value={emoji}
+                readOnly={true}
+                style={{
+                  textAlign: 'left',
+                  textTransform: 'uppercase',
+                }}
+              />
+            </div>
+          </Dropdown.Trigger>
+          <Dropdown.Menu
+            color="secondary"
+            disallowEmptySelection
+            selectionMode="single"
+            selectedKeys={emoji}
+            onSelectionChange={(e) => {
+              // console.log(e.currentKey);
+              setEmoji((e as any).currentKey);
+            }}
+          >
+            <Dropdown.Item key="🤡">🤡</Dropdown.Item>
+            <Dropdown.Item key="🤖">🤖</Dropdown.Item>
+            <Dropdown.Item key="👽">👽</Dropdown.Item>
+            <Dropdown.Item key="👻">👻</Dropdown.Item>
+            <Dropdown.Item key="🧚‍♀️">🧚‍♀️</Dropdown.Item>
+            <Dropdown.Item key="🧝‍♀️">🧝‍♀️</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Modal.Body>
       <Modal.Footer>
         <Button

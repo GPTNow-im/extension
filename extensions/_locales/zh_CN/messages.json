@@ -56,12 +56,15 @@
     "message": "配置"
   },
   "tips": {
-    "message": "Tips: 按住拖动按钮可移动位置"
+    "message": "Tips: 按住拖动按钮可移动位置，网页中选中文字可以快速调起对话，可以在 https://GPTNow.pro 网站中独立使用"
   },
   "openchat": {
     "message": "开始对话"
   },
   "askgpt": {
     "message": "向 GPT 提问"
+  },
+  "gowebsite": {
+    "message": "在 GPTNow.pro 上使用"
   }
 }

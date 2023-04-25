@@ -63,5 +63,8 @@
   },
   "askgpt": {
     "message": "Ask GPT"
+  },
+  "gowebsite": {
+    "message": "Chat in GPTNow.pro"
   }
 }

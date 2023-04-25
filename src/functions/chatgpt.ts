@@ -63,3 +63,34 @@ export async function setMemoryLength(memorylength: number) {
     });
   });
 }
+export async function getGPTBaseURL(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(['baseurl'], function (result) {
+      resolve((result.baseurl as string) || 'https://pro.gptnow.pro');
+    });
+  });
+}
+
+export async function setGPTBaseURL(baseurl: string) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.set({ baseurl }, function () {
+      resolve(null);
+    });
+  });
+}
+
+export async function getGPTEmoji(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(['emoji'], function (result) {
+      resolve((result.emoji as string) || '🤖');
+    });
+  });
+}
+
+export async function setGPTEmoji(emoji: string) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.set({ emoji }, function () {
+      resolve(null);
+    });
+  });
+}

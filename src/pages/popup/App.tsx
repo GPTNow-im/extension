@@ -33,7 +33,7 @@ function Root() {
       style={{
         padding: '30px',
         width: '400px',
-        height: '500px',
+        height: '800px',
         paddingTop: '10px',
       }}
     >
