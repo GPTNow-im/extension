@@ -32,9 +32,5 @@
 
 
  <h3 align="center">Preview</h3>
-
-<p align="center"><img src="https://user-images.githubusercontent.com/897401/233962454-f511123f-b9bf-46cb-88cc-7fea04da1b89.png" width="500" /></p>
-
-<p align="center"><img src="https://user-images.githubusercontent.com/897401/233962501-c1ac3dc5-994d-4080-a2b7-eac228e6a7e1.png" width="500" /></p>
-
-<p align="center"><img src="https://user-images.githubusercontent.com/897401/233962528-965024e6-f23d-48f2-83a6-e221d3f61e12.png" width="500" /></p>
+ 
+<p align="center"><img src="https://user-images.githubusercontent.com/897401/234149227-049c8956-1b85-4169-b81f-aa367a89b24a.png" /></p>
