@@ -19,18 +19,18 @@
 <p></p>
 <p align="center"><a href="https://chrome.google.com/webstore/detail/chatgpt-anywhere-chat-on/jcfkfnhebnhaldhlgfiaglpcjkdikbhc"><img src="https://user-images.githubusercontent.com/897401/233967967-03e1f658-907f-4d61-9e94-5aa894769b10.svg"/></a></p>
 
-
-<p align="center">1. Download the extension from <a href="https://chrome.google.com/webstore/detail/chatgpt-anywhere-chat-on/jcfkfnhebnhaldhlgfiaglpcjkdikbhc">Chrome Store</a>.</p>
-
-<p align="center">2. Install it.</p>
-
-<p align="center">3. Set you openAI API key in the extension popup.</p>
-
-<p align="center">4. Open Chat From the icon on any page, or select some text in webpage and click "Call ChatGPT" to open Chat Window.</p>
+<p align="center">1. </p>
+<p align="center">Install the extension from <a href="https://chrome.google.com/webstore/detail/chatgpt-anywhere-chat-on/jcfkfnhebnhaldhlgfiaglpcjkdikbhc">Chrome Store</a>.</p>
+<p align="center">2. </p>
+<p align="center">Get OpenAI ApiKey from <a href="https://openai.com/api/">here</a>.</p>
+<p align="center">3. </p>
+<p align="center">Set you openAI API key in the extension Setting popup.</p>
+<p align="center">4. </p>
+<p align="center">Open Chat From the icon on any page, or select some text in webpage and click "Call ChatGPT" to open Chat Window.</p>
 
 <p align="center"><img src="https://user-images.githubusercontent.com/897401/233968646-7c4b277c-c0a7-47b1-a66c-1578d78e5539.png" width="300" /></p>
 
 
  <h3 align="center">Preview</h3>
- 
-<p align="center"><img src="https://user-images.githubusercontent.com/897401/234149227-049c8956-1b85-4169-b81f-aa367a89b24a.png" /></p>
+
+<p align="center"><img src="https://user-images.githubusercontent.com/897401/234309709-5c331052-a3f4-4497-9025-6e8aab2b3c04.png" /></p>
