@@ -1,30 +1,14 @@
 import { Tooltip } from '@nextui-org/react';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createClient, createChatGPTClient, ChatGPTProvider } from 'uikit.chat';
 import ChatModal from './ChatModal';
 import styled from 'styled-components';
 import { ConfigComponent } from '../../components/Config';
 
-import { toast } from 'react-hot-toast';
 import { makeElementDrag } from '../../functions/makeElementDrag';
 import { globalBus } from '../../functions/globalBus';
-import {
-  getKey,
-  getActiveModel,
-  getTemperature,
-  getMemoryLength,
-  getGPTBaseURL,
-  getGPTEmoji,
-} from '../../functions/chatgpt';
 const chatuiClient = createClient();
 const chatGPTStore = createChatGPTClient(chatuiClient);
-
-// chatuiClient.messageStore.on('message_displayed', (message) => {
-//   console.log('message_displayed', message, chatuiClient.messageStore.messages);
-//   chrome.storage.local.set({
-//     messages: JSON.stringify(chatuiClient.messageStore.messages),
-//   });
-// });
 
 const logo = chrome.runtime.getURL('images/logo.png');
 
@@ -61,6 +45,8 @@ const MenuItem = styled.div`
 `;
 function Root() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenFromSearch, setIsOpenFromSearch] = useState(false);
+
   const [showTrigger, setShowTrigger] = useState(true);
 
   const [settingVisible, setSettingVisible] = useState(false);
@@ -94,6 +80,15 @@ function Root() {
         }, 1000);
       }
     });
+    globalBus.addListener('openchat-from-search', (text) => {
+      if (text) {
+        setIsOpenFromSearch(true);
+        setTimeout(() => {
+          chatGPTStore.chatuiClient.chatboxStore.inputValue = text;
+          chatGPTStore.chatuiClient.chatboxStore.submit();
+        }, 1000);
+      }
+    });
     makeElementDrag(() => {
       setIsOpen(true);
     });
@@ -107,8 +102,10 @@ function Root() {
             onClose={() => {
               setIsOpen(false);
             }}
-            show={isOpen}
+            show={isOpen || isOpenFromSearch}
+            isSearch={isOpenFromSearch}
           />
+
           {showTrigger && (
             <div
               id="chatgpt-anywhere-trigger"
@@ -151,7 +148,7 @@ function Root() {
                           <Tooltip content={getLang('rate')}>
                             <a
                               target="_blank"
-                              href="https://chrome.google.com/webstore/detail/chatgpt-anywhere-chat-on/jcfkfnhebnhaldhlgfiaglpcjkdikbhc/reviews"
+                              href="https://gptnow.pro/api/chrome"
                               rel="noreferrer"
                             >
                               <svg
@@ -191,7 +188,7 @@ function Root() {
                           <Tooltip content={'Github OpenSource'}>
                             <a
                               target="_blank"
-                              href="https://github.com/0xYootou/chatgpt-anywhere-extension"
+                              href="https://gptnow.pro/api/github"
                               rel="noreferrer"
                             >
                               <svg

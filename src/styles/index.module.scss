@@ -6,11 +6,33 @@
   height: 70vh;
   z-index: 999;
   transition: all 0.5s ease-in-out;
-  background-color: #fff;
-  box-shadow: 1px 1px 30px 0 rgba(0, 0, 0, 0.1);
+  background-color: #f7f7f7;
+  box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #efefef;
   border-radius: 10px;
   overflow: hidden;
   padding-top: 20px;
+  &.chatgpt-popup-hide {
+    bottom: -700px;
+    height: 550px;
+  }
+}
+
+.chatgpt-popup-search {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  width: 400px;
+  height: 50vh;
+  z-index: 999;
+  transition: all 0.5s ease-in-out;
+  background-color: #f7f7f7;
+  box-shadow: 1px 1px 15px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  overflow: hidden;
+  padding-top: 20px;
+
   &.chatgpt-popup-hide {
     bottom: -700px;
     height: 550px;

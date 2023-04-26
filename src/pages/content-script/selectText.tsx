@@ -67,6 +67,38 @@ export default function SelectText() {
 
   const bindEvents = () => {
     if (binded) return;
+    if (window.location.host.indexOf('google.com') != -1) {
+      window.addEventListener('load', () => {
+        console.log('onload');
+        // 获取 google 搜索的 query 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const keyword = urlParams.get('q');
+        if (keyword) {
+          globalBus.emit('openchat-from-search', keyword);
+        }
+      });
+    } else if (window.location.host.indexOf('baidu.com') != -1) {
+      window.addEventListener('load', () => {
+        console.log('onload');
+        // 获取 baidu 搜索的 query 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const keyword = urlParams.get('wd');
+        if (keyword) {
+          globalBus.emit('openchat-from-search', keyword);
+        }
+      });
+      // bing
+    } else if (window.location.host.indexOf('bing.com') != -1) {
+      window.addEventListener('load', () => {
+        console.log('onload');
+        // 获取 bing 搜索的 query 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const keyword = urlParams.get('q');
+        if (keyword) {
+          globalBus.emit('openchat-from-search', keyword);
+        }
+      });
+    }
     document.addEventListener(
       'selectionchange',
       _.debounce(function () {
