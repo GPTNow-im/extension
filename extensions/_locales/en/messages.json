@@ -61,10 +61,67 @@
   "openchat": {
     "message": "Open Chat"
   },
+  "togpt": {
+    "message": "Request GPT to"
+  },
   "askgpt": {
-    "message": "Ask GPT"
+    "message": "Answer"
+  },
+  "gptinterpret": {
+    "message": "Interpret"
+  },
+  "gpttransen": {
+    "message": "Translate(EN)"
+  },
+  "gpttransen_cn": {
+    "message": ""
+  },
+  "gptwritemore": {
+    "message": "Write More"
+  },
+  "gptrewrite": {
+    "message": "Rewrite"
   },
   "gowebsite": {
     "message": "Chat in GPTNow.pro"
+  },
+  "interpret_prompt": {
+    "message": "You are an interpretation assistant, please interpret the following content"
+  },
+  "searchprompt": {
+    "message": "You are a search assistant, the following user conversations are user questions, please answer them"
+  },
+  "translate_en_prompt": {
+    "message": "You are a translation assistant, please translate any information entered by the user into English"
+  },
+  "writemore_prompt": {
+    "message": "You are a continuation assistant, please continue to write the following content"
+  },
+  "rewrite_prompt": {
+    "message": "You are a rewrite helper, please rewrite the following"
+  },
+  "domain_prompt": {
+    "message": "You are a domain name naming assistant, please recommend 20 high-quality domain names for the following keywords"
+  },
+  "config_functions": {
+    "message": "Function Setting"
+  },
+  "searchon": {
+    "message": "Auto Search"
+  },
+  "searchon_title": {
+    "message": "Auto open GPTNow when searching on search engine"
+  },
+  "selectionon": {
+    "message": "Selection Menu"
+  },
+  "selectionon_title": {
+    "message": "Show menu when selecting text to open GPTNow"
+  },
+  "domainon": {
+    "message": "Domain Name"
+  },
+  "domainon_title": {
+    "message": "Auto recommend domain name when searching on domain name website"
   }
 }

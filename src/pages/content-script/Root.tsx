@@ -7,14 +7,12 @@ import { ConfigComponent } from '../../components/Config';
 
 import { makeElementDrag } from '../../functions/makeElementDrag';
 import { globalBus } from '../../functions/globalBus';
+import { getLang } from '../../utils/getLang';
+import { restoreConfig } from '../../stores/Config';
 const chatuiClient = createClient();
 const chatGPTStore = createChatGPTClient(chatuiClient);
 
 const logo = chrome.runtime.getURL('images/logo.png');
-
-function getLang(key: string) {
-  return chrome && chrome.i18n ? chrome.i18n.getMessage(key) : key;
-}
 
 const IconMenuItem = styled.div`
   display: flex;
@@ -52,16 +50,7 @@ function Root() {
   const [settingVisible, setSettingVisible] = useState(false);
 
   useEffect(() => {
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      if (request.text) {
-        setIsOpen(true);
-        setTimeout(() => {
-          chatGPTStore.chatuiClient.chatboxStore.inputValue = request.text;
-          chatGPTStore.chatuiClient.chatboxStore.submit();
-        }, 1000);
-      }
-    });
-    globalBus.addListener('selecttext', (text) => {
+    globalBus.addListener('selecttext', (_text) => {
       document
         .getElementById('chatgpt-anywhere-trigger')
         ?.classList.add('hover');
@@ -75,20 +64,109 @@ function Root() {
       if (text) {
         setIsOpen(true);
         setTimeout(() => {
-          chatGPTStore.chatuiClient.chatboxStore.inputValue = text;
-          chatGPTStore.chatuiClient.chatboxStore.submit();
+          if (chatGPTStore.chatuiClient) {
+            chatGPTStore.chatuiClient.chatboxStore.inputValue = text;
+            chatGPTStore.chatuiClient?.chatboxStore.submit();
+          }
         }, 1000);
       }
     });
-    globalBus.addListener('openchat-from-search', (text) => {
-      if (text) {
-        setIsOpenFromSearch(true);
+    globalBus.addListener(
+      'openchat-from-search',
+      async (info: {
+        keyword: string;
+        url: string;
+        type: 'google' | 'bing' | 'baidu';
+      }) => {
+        if (info.keyword) {
+          const config = await restoreConfig();
+          if (!config.searchOn) {
+            return;
+          }
+          if (info.type === 'google') {
+            if (!config.searchOnGoogle) {
+              return;
+            }
+          } else if (info.type === 'bing') {
+            if (!config.searchOnBing) {
+              return;
+            }
+          } else if (info.type === 'baidu') {
+            if (!config.searchOnBaidu) {
+              return;
+            }
+          }
+          setIsOpenFromSearch(true);
+          setTimeout(() => {
+            if (chatGPTStore.chatuiClient) {
+              chatGPTStore.chatuiClient.chatboxStore.inputValue = info.keyword;
+              chatGPTStore.chatuiClient?.chatboxStore.submit();
+            }
+          }, 700);
+        }
+      },
+    );
+
+    async function handleSelectText(text: string, prompt_key: string) {
+      chatGPTStore.session && setIsOpen(true);
+      setTimeout(() => {
+        if (chatGPTStore.chatuiClient && chatGPTStore.session) {
+          chatGPTStore.chatuiClient.chatboxStore.submitWithMessageS([
+            {
+              role: 'system',
+              content: getLang(prompt_key),
+            },
+            {
+              role: 'user',
+              content: text,
+            },
+          ]);
+        }
+      }, 700);
+    }
+    globalBus.addListener('search', async (text: string) => {
+      handleSelectText(text, 'searchprompt');
+    });
+    globalBus.addListener('interpret', async (text: string) => {
+      handleSelectText(text, 'interpret_prompt');
+    });
+    globalBus.addListener('translate_en', async (text: string) => {
+      handleSelectText(text, 'translate_en_prompt');
+    });
+    globalBus.addListener('translate_cn', async (text: string) => {
+      handleSelectText(text, 'translate_cn_prompt');
+    });
+    globalBus.addListener('writemore', async (text: string) => {
+      handleSelectText(text, 'writemore_prompt');
+    });
+    globalBus.addListener('rewrite', async (text: string) => {
+      handleSelectText(text, 'rewrite_prompt');
+    });
+    globalBus.addListener(
+      'openchat-from-domain',
+      async (o: { keyword: string }) => {
+        const config = await restoreConfig();
+
+        if (!config.domainOn) {
+          return;
+        }
+        chatGPTStore.session && setIsOpen(true);
         setTimeout(() => {
-          chatGPTStore.chatuiClient.chatboxStore.inputValue = text;
-          chatGPTStore.chatuiClient.chatboxStore.submit();
-        }, 1000);
-      }
-    });
+          if (chatGPTStore.chatuiClient && chatGPTStore.session) {
+            chatGPTStore.chatuiClient.chatboxStore.submitWithMessageS([
+              {
+                role: 'system',
+                content: getLang('domain_prompt'),
+              },
+              {
+                role: 'user',
+                content: o.keyword,
+              },
+            ]);
+          }
+        }, 700);
+      },
+    );
     makeElementDrag(() => {
       setIsOpen(true);
     });
@@ -101,6 +179,7 @@ function Root() {
           <ChatModal
             onClose={() => {
               setIsOpen(false);
+              setIsOpenFromSearch(false);
             }}
             show={isOpen || isOpenFromSearch}
             isSearch={isOpenFromSearch}
@@ -326,8 +405,16 @@ function Root() {
             onSubmit={(config) => {
               setSettingVisible(false);
 
-              chatGPTStore.gptInfo.setInfos(config);
-              chatGPTStore.refreshSession('default');
+              chatGPTStore.gptInfo.setInfos({
+                apiKey: config.openai_key,
+                model: config.model2,
+                temperature: config.temperature,
+                baseURL: config.baseurl,
+                memoryLength: config.memorylength,
+                emoji: config.emoji,
+                name: config.emoji,
+              });
+              // chatGPTStore.refreshSession('default');
             }}
           />
         </>

@@ -61,10 +61,70 @@
   "openchat": {
     "message": "开始对话"
   },
+  "togpt": {
+    "message": "请求 GPT"
+  },
   "askgpt": {
-    "message": "向 GPT 提问"
+    "message": "解答"
+  },
+  "gptinterpret": {
+    "message": "解读"
+  },
+  "gpttransen": {
+    "message": "翻译(EN)"
+  },
+  "gpttransen_cn": {
+    "message": "翻译(中)"
+  },
+  "gptwritemore": {
+    "message": "续写"
+  },
+  "gptrewrite": {
+    "message": "重写"
   },
   "gowebsite": {
     "message": "在 GPTNow.pro 上使用"
+  },
+  "interpret_prompt": {
+    "message": "你是一个解读助手，请解读以下内容"
+  },
+  "searchprompt": {
+    "message": "你是一个搜索助手，以下用户的对话是用户的提问，请为其解答"
+  },
+  "translate_en_prompt": {
+    "message": "你是一个翻译助手，请将用户输入的任何信息翻译为英文"
+  },
+  "translate_cn_prompt": {
+    "message": "你是一个翻译助手，请将用户输入的任何信息翻译为中文"
+  },
+  "writemore_prompt": {
+    "message": "你是一个续写助手，请续写以下内容"
+  },
+  "rewrite_prompt": {
+    "message": "你是一个重写助手，请重写以下内容"
+  },
+  "domain_prompt": {
+    "message": "你是一个域名起名助手，请为以下关键词推荐 20 个优质域名"
+  },
+  "config_functions": {
+    "message": "功能配置"
+  },
+  "searchon": {
+    "message": "自动搜索"
+  },
+  "searchon_title": {
+    "message": "在搜索引擎搜索的时候自动唤起 GPTNow"
+  },
+  "selectionon": {
+    "message": "划选菜单"
+  },
+  "selectionon_title": {
+    "message": "选中文本的时候显示菜单快速唤起 GPTNow"
+  },
+  "domainon": {
+    "message": "域名起名"
+  },
+  "domainon_title": {
+    "message": "在域名网站搜索的时候自动推荐优质域名"
   }
 }

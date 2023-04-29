@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.13",
+  "version": "0.15",
   "name": "__MSG_title__",
   "description": "__MSG_description__",
   "default_locale": "en",
@@ -22,7 +22,7 @@
   "background": {
     "service_worker": "./dist/static/js/background.js"
   },
-  "permissions": ["storage", "contextMenus"],
+  "permissions": ["storage"],
   "web_accessible_resources": [
     {
       "resources": ["images/*"],

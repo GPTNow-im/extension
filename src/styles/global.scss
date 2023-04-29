@@ -1,3 +1,10 @@
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+#chatgpt-anywhere-container * {
+  font-family: Montserrat, Inter, Roboto, -apple-system, BlinkMacSystemFont,
+    PingFang SC, Microsoft YaHei, sans-serif !important;
+}
+
 #chatgpt-anywhere-trigger {
   position: fixed;
   right: 20px;

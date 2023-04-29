@@ -2,8 +2,8 @@
   position: fixed;
   bottom: 50px;
   right: 30px;
-  width: 520px;
-  height: 70vh;
+  width: 440px;
+  height: 60vh;
   z-index: 999;
   transition: all 0.5s ease-in-out;
   background-color: #f7f7f7;
@@ -11,10 +11,17 @@
   border: 1px solid #efefef;
   border-radius: 10px;
   overflow: hidden;
-  padding-top: 20px;
+  padding-top: 30px;
+  box-sizing: border-box;
   &.chatgpt-popup-hide {
-    bottom: -700px;
-    height: 550px;
+    bottom: -700px !important;
+    height: 550px !important;
+  }
+  &.chatgpt-popup-expand {
+    height: 100vh;
+    width: 500px;
+    bottom: 0;
+    right: 0;
   }
 }
 
@@ -39,10 +46,37 @@
   }
 }
 
+.chatgpt-logo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333 !important;
+  font-weight: 500;
+  text-decoration: none;
+}
 .chatgpt-setting {
   position: absolute;
   top: 15px;
   right: 45px;
+  cursor: pointer;
+  svg {
+    fill: #333;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+  }
+  &:hover {
+    svg {
+      fill: #666;
+      color: #666;
+    }
+  }
+}
+.chatgpt-expand {
+  position: absolute;
+  top: 15px;
+  right: 75px;
   cursor: pointer;
   svg {
     fill: #333;

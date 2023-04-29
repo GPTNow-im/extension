@@ -5,6 +5,8 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { globalBus } from '../../functions/globalBus';
+import { Divider } from '@nextui-org/react';
+import { restoreConfig } from '../../stores/Config';
 
 function getLang(key: string) {
   return chrome && chrome.i18n ? chrome.i18n.getMessage(key) : key;
@@ -42,6 +44,10 @@ const RootElement = styled.div`
     position: absolute;
     bottom: -5px;
   }
+
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
 `;
 
 const ButtonElement = styled.div`
@@ -49,9 +55,30 @@ const ButtonElement = styled.div`
   line-height: 25px;
   color: #000;
   cursor: pointer;
+  padding: 0 5px;
   &:hover {
     opacity: 0.5;
   }
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: #ddd;
+    margin-left: 9px;
+  }
+  &:last-child {
+    &::after {
+      display: none;
+    }
+  }
+`;
+
+const LabelElement = styled.div`
+  font-size: 14px;
+  line-height: 25px;
+  color: #999;
+  padding: 0 5px;
 `;
 
 let binded = false;
@@ -74,7 +101,11 @@ export default function SelectText() {
         const urlParams = new URLSearchParams(window.location.search);
         const keyword = urlParams.get('q');
         if (keyword) {
-          globalBus.emit('openchat-from-search', keyword);
+          globalBus.emit('openchat-from-search', {
+            keyword,
+            url: window.location.href,
+            type: 'google',
+          });
         }
       });
     } else if (window.location.host.indexOf('baidu.com') != -1) {
@@ -84,7 +115,11 @@ export default function SelectText() {
         const urlParams = new URLSearchParams(window.location.search);
         const keyword = urlParams.get('wd');
         if (keyword) {
-          globalBus.emit('openchat-from-search', keyword);
+          globalBus.emit('openchat-from-search', {
+            keyword,
+            url: window.location.href,
+            type: 'baidu',
+          });
         }
       });
       // bing
@@ -95,15 +130,102 @@ export default function SelectText() {
         const urlParams = new URLSearchParams(window.location.search);
         const keyword = urlParams.get('q');
         if (keyword) {
-          globalBus.emit('openchat-from-search', keyword);
+          globalBus.emit('openchat-from-search', {
+            keyword,
+            url: window.location.href,
+            type: 'bing',
+          });
+        }
+      });
+    } else if (window.location.href.indexOf('name.com/domain/search/') != -1) {
+      window.addEventListener('load', () => {
+        console.log('onload');
+        // 获取 search 的关键字
+        const keyword: any = document.querySelector('#search-keyword');
+
+        if (keyword) {
+          globalBus.emit('openchat-from-domain', {
+            keyword: keyword.value,
+          });
+        }
+      });
+    } else if (
+      window.location.href.indexOf('godaddy.com/domainsearch/find') != -1
+    ) {
+      //godaddy.com/domainsearch/find?checkAvail=1&domainToCheck=aaa
+      window.addEventListener('load', () => {
+        console.log('onload');
+
+        const dom: HTMLInputElement | null =
+          document.querySelector('#domain-search-box');
+
+        dom?.addEventListener('keydown', function (e) {
+          if (e.keyCode === 13) {
+            if (dom?.value) {
+              globalBus.emit('openchat-from-domain', {
+                keyword: dom.value,
+              });
+            }
+          }
+        });
+        // 获取 search 的关键字
+        const urlParams = new URLSearchParams(window.location.search);
+        const keyword = urlParams.get('domainToCheck');
+
+        if (keyword) {
+          globalBus.emit('openchat-from-domain', {
+            keyword: keyword,
+          });
+        }
+      });
+    } else if (
+      window.location.href.indexOf(
+        'namecheap.com/domains/registration/results/',
+      ) != -1
+    ) {
+      //https://www.namecheap.com/domains/registration/results/?domain=soul.id
+      window.addEventListener('load', () => {
+        console.log('onload');
+        // 获取 search 的关键字
+        const dom: HTMLInputElement | null =
+          document.querySelector('#search-query');
+        dom?.addEventListener('keydown', function (e) {
+          if (e.keyCode === 13) {
+            if (dom?.value) {
+              globalBus.emit('openchat-from-domain', {
+                keyword: dom.value,
+              });
+            }
+          }
+        });
+        const urlParams = new URLSearchParams(window.location.search);
+        const keyword = urlParams.get('domain');
+
+        if (keyword) {
+          globalBus.emit('openchat-from-domain', {
+            keyword: keyword,
+          });
         }
       });
     }
     document.addEventListener(
       'selectionchange',
-      _.debounce(function () {
+      _.debounce(async function () {
+        const config = await restoreConfig();
+
+        if (!config.selectionOn) {
+          return;
+        }
         const selection = document.getSelection();
         console.log('selectionchange', selection);
+        // 判断 selection 的 dom 当前是否在 #chatgpt-anywhere-container 里面
+        const isInChatGPT = !!selection?.anchorNode?.parentElement?.closest(
+          '#chatgpt-anywhere-container',
+        );
+        if (isInChatGPT) {
+          return;
+        }
+
         if (
           selection &&
           selection.type === 'Range' &&
@@ -141,11 +263,6 @@ export default function SelectText() {
   const [convertResult, setConvertResult] = React.useState<
     Date | null | string
   >();
-  const convert = async function (e: React.MouseEvent) {
-    if (text) {
-      globalBus.emit('openchat', text);
-    }
-  };
 
   return (
     <>
@@ -163,13 +280,62 @@ export default function SelectText() {
           }}
           ref={rootRef}
         >
+          <LabelElement>{getLang('togpt')}</LabelElement>
           <ButtonElement
             onClick={(e) => {
               e.stopPropagation();
-              convert(e);
+              globalBus.emit('search', text);
+              setText('');
             }}
           >
             {getLang('askgpt')}
+          </ButtonElement>
+          <ButtonElement
+            onClick={(e) => {
+              e.stopPropagation();
+              globalBus.emit('interpret', text);
+              setText('');
+            }}
+          >
+            {getLang('gptinterpret')}
+          </ButtonElement>
+          <ButtonElement
+            onClick={(e) => {
+              e.stopPropagation();
+              globalBus.emit('translate_en', text);
+              setText('');
+            }}
+          >
+            {getLang('gpttransen')}
+          </ButtonElement>
+          {getLang('gpttransen_cn') ? (
+            <ButtonElement
+              onClick={(e) => {
+                e.stopPropagation();
+                globalBus.emit('translate_cn', text);
+                setText('');
+              }}
+            >
+              {getLang('gpttransen_cn')}
+            </ButtonElement>
+          ) : null}
+          <ButtonElement
+            onClick={(e) => {
+              e.stopPropagation();
+              globalBus.emit('writemore', text);
+              setText('');
+            }}
+          >
+            {getLang('gptwritemore')}
+          </ButtonElement>
+          <ButtonElement
+            onClick={(e) => {
+              e.stopPropagation();
+              globalBus.emit('rewrite', text);
+              setText('');
+            }}
+          >
+            {getLang('gptrewrite')}
           </ButtonElement>
         </RootElement>
       )}
