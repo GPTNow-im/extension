@@ -14,11 +14,11 @@ function getLang(key: string) {
 const RootElement = styled.div`
   position: fixed;
   background: #fff;
-  padding: 10px;
+  padding: 8px;
   border-radius: 5px;
   // box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-size: 12px;
-  line-height: 25px;
+  line-height: 20px;
   /* Light / Depth - 8 */
 
   filter: drop-shadow(0px 0.6px 1.8px rgba(0, 0, 0, 0.1))
@@ -44,18 +44,14 @@ const RootElement = styled.div`
     position: absolute;
     bottom: -5px;
   }
-
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
 `;
 
 const ButtonElement = styled.div`
-  font-size: 14px;
-  line-height: 25px;
+  font-size: 12px;
+  line-height: 20px;
   color: #000;
   cursor: pointer;
-  padding: 0 5px;
+  padding: 0 3px;
   &:hover {
     opacity: 0.5;
   }
@@ -75,10 +71,17 @@ const ButtonElement = styled.div`
 `;
 
 const LabelElement = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   line-height: 25px;
   color: #999;
-  padding: 0 5px;
+  padding: 0 3px;
+  font-size: 12px;
+`;
+
+const LineElement = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
 `;
 
 let binded = false;
@@ -270,7 +273,7 @@ export default function SelectText() {
         <RootElement
           style={{
             left: pos.x + 0 + 'px',
-            top: pos.y + 40 + 'px',
+            top: pos.y + 16 + 'px',
           }}
           onMouseEnter={() => {
             setIsInPopup(true);
@@ -281,62 +284,67 @@ export default function SelectText() {
           ref={rootRef}
         >
           <LabelElement>{getLang('togpt')}</LabelElement>
-          <ButtonElement
-            onClick={(e) => {
-              e.stopPropagation();
-              globalBus.emit('search', text);
-              setText('');
-            }}
-          >
-            {getLang('askgpt')}
-          </ButtonElement>
-          <ButtonElement
-            onClick={(e) => {
-              e.stopPropagation();
-              globalBus.emit('interpret', text);
-              setText('');
-            }}
-          >
-            {getLang('gptinterpret')}
-          </ButtonElement>
-          <ButtonElement
-            onClick={(e) => {
-              e.stopPropagation();
-              globalBus.emit('translate_en', text);
-              setText('');
-            }}
-          >
-            {getLang('gpttransen')}
-          </ButtonElement>
-          {getLang('gpttransen_cn') ? (
+          <LineElement>
             <ButtonElement
               onClick={(e) => {
                 e.stopPropagation();
-                globalBus.emit('translate_cn', text);
+                globalBus.emit('search', text);
                 setText('');
               }}
             >
-              {getLang('gpttransen_cn')}
+              {getLang('askgpt')}
             </ButtonElement>
-          ) : null}
-          <ButtonElement
-            onClick={(e) => {
-              e.stopPropagation();
-              globalBus.emit('writemore', text);
-              setText('');
-            }}
-          >
-            {getLang('gptwritemore')}
-          </ButtonElement>
-          <ButtonElement
-            onClick={(e) => {
-              e.stopPropagation();
-              globalBus.emit('rewrite', text);
-              setText('');
-            }}
-          >
-            {getLang('gptrewrite')}
-          </ButtonElement>
+
+            <ButtonElement
+              onClick={(e) => {
+                e.stopPropagation();
+                globalBus.emit('interpret', text);
+                setText('');
+              }}
+            >
+              {getLang('gptinterpret')}
+            </ButtonElement>
+            <ButtonElement
+              onClick={(e) => {
+                e.stopPropagation();
+                globalBus.emit('translate_en', text);
+                setText('');
+              }}
+            >
+              {getLang('gpttransen')}
+            </ButtonElement>
+            {getLang('gpttransen_cn') ? (
+              <ButtonElement
+                onClick={(e) => {
+                  e.stopPropagation();
+                  globalBus.emit('translate_cn', text);
+                  setText('');
+                }}
+              >
+                {getLang('gpttransen_cn')}
+              </ButtonElement>
+            ) : null}
+          </LineElement>
+          <LineElement>
+            <ButtonElement
+              onClick={(e) => {
+                e.stopPropagation();
+                globalBus.emit('writemore', text);
+                setText('');
+              }}
+            >
+              {getLang('gptwritemore')}
+            </ButtonElement>
+            <ButtonElement
+              onClick={(e) => {
+                e.stopPropagation();
+                globalBus.emit('rewrite', text);
+                setText('');
+              }}
+            >
+              {getLang('gptrewrite')}
+            </ButtonElement>
+          </LineElement>
         </RootElement>
       )}
     </>

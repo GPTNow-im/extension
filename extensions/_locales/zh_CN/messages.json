@@ -1,7 +1,7 @@
 {
   "title": {
-    "message": "GPTNow.Pro, 在任意页面快速唤起 ChatGPT 并对话",
-    "description": "GPTNow.Pro, 在任意页面快速唤起 ChatGPT 并对话"
+    "message": "GPTNow.Pro - 在任意页面快速唤起优雅/强大/免费的 ChatGPT 对话",
+    "description": "GPTNow.Pro - 在任意页面快速唤起优雅/强大/免费的 ChatGPT 对话"
   },
   "description": {
     "message": "随时、随地、任意页面唤起 Chat GPT 并在当前页面持续对话",
@@ -126,5 +126,17 @@
   },
   "domainon_title": {
     "message": "在域名网站搜索的时候自动推荐优质域名"
+  },
+  "search_confirm": {
+    "message": "🔍 点击这里，向 ChatGPT 提问您搜索的内容"
+  },
+  "about_memorylength": {
+    "message": "发送给 ChatGPT 的历史对话的长度"
+  },
+  "about_proxyurl": {
+    "message": "代理服务器地址，用于解决网络问题，如果不可用，请填写 https://api.openai.com 并在国际网络使用"
+  },
+  "about_proxyurl_github": {
+    "message": "一键部署自己的代理"
   }
 }

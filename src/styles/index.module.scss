@@ -161,3 +161,31 @@
   background: rgba(87, 80, 233);
   clip-path: polygon(80% 0, 100% 70%, 100% 100%, 20% 90%);
 }
+
+.search-tip {
+  padding: 10px;
+  position: absolute;
+  bottom: 32px;
+  right: 0px;
+  font-size: 14px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  color: #333;
+  word-break: keep-all;
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: display_anywhere_trigger 0.5s 0.7s ease-in-out forwards;
+  transform-origin: 100% 100%;
+  transform: scale(0);
+}
+@keyframes display_anywhere_trigger {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

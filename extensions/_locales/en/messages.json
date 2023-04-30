@@ -1,7 +1,7 @@
 {
   "title": {
-    "message": "GPTNow.Pro, Chat on any page",
-    "description": "GPTNow.Pro, Chat on any page"
+    "message": "GPTNow.Pro - Quickly ChatGPT on any page",
+    "description": "GPTNow.Pro - Quickly ChatGPT on any page"
   },
   "description": {
     "message": "ChatGPT anywhere on anytime in anypage now",
@@ -123,5 +123,17 @@
   },
   "domainon_title": {
     "message": "Auto recommend domain name when searching on domain name website"
+  },
+  "search_confirm": {
+    "message": "🔍 Click here to ask ChatGPT about your question"
+  },
+  "about_memorylength": {
+    "message": "Length of historical conversations sent to ChatGPT"
+  },
+  "about_proxyurl": {
+    "message": "Proxy server address, used to solve network problems, if not available, please fill in https://api.openai.com and use it in the international network"
+  },
+  "about_proxyurl_github": {
+    "message": "Deploy your own proxy agent with one click"
   }
 }

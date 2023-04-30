@@ -11,6 +11,7 @@ export type IConfig = {
   searchOn: boolean;
   domainOn: boolean;
   selectionOn: boolean;
+  fontsize: number;
 };
 
 const Config: IConfig = {
@@ -26,6 +27,7 @@ const Config: IConfig = {
   searchOn: true,
   domainOn: true,
   selectionOn: true,
+  fontsize: 14,
 };
 
 export function restoreConfig(): Promise<IConfig> {

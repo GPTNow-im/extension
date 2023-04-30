@@ -9,6 +9,7 @@ import { makeElementDrag } from '../../functions/makeElementDrag';
 import { globalBus } from '../../functions/globalBus';
 import { getLang } from '../../utils/getLang';
 import { restoreConfig } from '../../stores/Config';
+import styles from '../../styles/index.module.scss';
 const chatuiClient = createClient();
 const chatGPTStore = createChatGPTClient(chatuiClient);
 
@@ -49,6 +50,10 @@ function Root() {
 
   const [settingVisible, setSettingVisible] = useState(false);
 
+  const [showSearchTip, setShowSearchTip] = useState('');
+
+  const [hideTriggerTemp, setHideTriggerTemp] = useState(false);
+
   useEffect(() => {
     globalBus.addListener('selecttext', (_text) => {
       document
@@ -79,30 +84,7 @@ function Root() {
         type: 'google' | 'bing' | 'baidu';
       }) => {
         if (info.keyword) {
-          const config = await restoreConfig();
-          if (!config.searchOn) {
-            return;
-          }
-          if (info.type === 'google') {
-            if (!config.searchOnGoogle) {
-              return;
-            }
-          } else if (info.type === 'bing') {
-            if (!config.searchOnBing) {
-              return;
-            }
-          } else if (info.type === 'baidu') {
-            if (!config.searchOnBaidu) {
-              return;
-            }
-          }
-          setIsOpenFromSearch(true);
-          setTimeout(() => {
-            if (chatGPTStore.chatuiClient) {
-              chatGPTStore.chatuiClient.chatboxStore.inputValue = info.keyword;
-              chatGPTStore.chatuiClient?.chatboxStore.submit();
-            }
-          }, 700);
+          setShowSearchTip(info.keyword);
         }
       },
     );
@@ -172,6 +154,13 @@ function Root() {
     });
   }, []);
 
+  useEffect(() => {
+    if (isOpen || isOpenFromSearch) {
+      setHideTriggerTemp(true);
+    } else {
+      setHideTriggerTemp(false);
+    }
+  }, [isOpen, isOpenFromSearch]);
   return (
     <>
       <ChatGPTProvider chatGPT={chatGPTStore}>
@@ -194,8 +183,51 @@ function Root() {
               style={{
                 right: '55px',
                 bottom: '55px',
+                display: hideTriggerTemp ? 'none' : 'flex',
               }}
             >
+              {showSearchTip ? (
+                <div
+                  className={styles['search-tip']}
+                  onClick={() => {
+                    setIsOpenFromSearch(true);
+                    const tip = showSearchTip;
+                    setTimeout(() => {
+                      if (chatGPTStore.chatuiClient) {
+                        chatGPTStore.chatuiClient?.chatboxStore.submitWithMessageS(
+                          [
+                            {
+                              role: 'system',
+                              content: getLang('searchprompt'),
+                            },
+                            {
+                              role: 'user',
+                              content: tip,
+                            },
+                          ],
+                        );
+                      }
+                    }, 700);
+                    setShowSearchTip('');
+                  }}
+                >
+                  {getLang('search_confirm')}
+                  <div
+                    style={{
+                      color: '#999',
+                      fontSize: '12px',
+                      marginTop: '5px',
+                      lineHeight: '1.5',
+                      textAlign: 'left',
+                      borderLeft: '2px solid #eee',
+                      paddingLeft: '5px',
+                    }}
+                  >
+                    {showSearchTip}
+                  </div>
+                </div>
+              ) : null}
+
               <Tooltip
                 enterDelay={400}
                 leaveDelay={100}
